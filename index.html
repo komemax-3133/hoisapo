@@ -1,169 +1,43 @@
-<!doctype html>
-<html lang="ja">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#5b8def">
+<!doctype html><html lang="ja"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#5b8def"><link rel="manifest" href="manifest.webmanifest">
 <title>ほいサポ</title>
-<link rel="manifest" href="manifest.webmanifest">
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#f5f7fb;color:#20252b;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif}
-header{background:#fff;padding:18px 18px 10px;position:sticky;top:0;z-index:2;border-bottom:1px solid #e4e8ee}
-h1{font-size:24px;margin:0 0 3px} .sub{color:#68727e;font-size:13px}
-main{padding:16px;max-width:720px;margin:auto}
-.card{background:#fff;border-radius:16px;padding:16px;margin-bottom:14px;box-shadow:0 1px 5px #0000000d}
-label{display:block;font-weight:700;font-size:14px;margin:0 0 7px}
-input,textarea,select{width:100%;border:1px solid #d9dee7;border-radius:11px;padding:12px;font-size:16px;background:#fff}
-textarea{min-height:170px;resize:vertical;line-height:1.65}
-.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-button{border:0;border-radius:11px;padding:13px 15px;font-size:16px;font-weight:700;cursor:pointer}
-.primary{background:#5b8def;color:#fff}.secondary{background:#eef2f8;color:#27303a}
-.success{background:#2e9d67;color:#fff}.danger{background:#f1e9e9;color:#8c3030}
-.buttons{display:flex;gap:9px;flex-wrap:wrap;margin-top:11px}
-.status{font-size:13px;color:#66717d;margin-top:8px;min-height:20px}
-.result h3{margin:0 0 8px;font-size:17px}
-.result textarea{min-height:115px}
-.small{font-size:12px;color:#69737f;line-height:1.5}
-.notice{background:#f6f8ff;border-left:4px solid #5b8def;padding:10px 12px;border-radius:8px;font-size:13px;line-height:1.5}
-.hidden{display:none}
-.nav{display:flex;gap:8px;margin-bottom:12px}.nav button{flex:1}
-</style>
-</head>
-<body>
-<header>
-  <h1>ほいサポ</h1>
-  <div class="sub">保育所等訪問支援・記録アプリ</div>
-</header>
-<main>
-  <div class="nav">
-    <button class="primary" id="tabRecord">記録</button>
-    <button class="secondary" id="tabAI">AI設定</button>
-    <button class="secondary" id="tabCheck">確認</button>
-  </div>
-
-  <section id="recordPanel">
-    <div class="card">
-      <h2 style="margin-top:0">訪問基本情報</h2>
-      <div class="row">
-        <div><label>対象児</label><input id="child" value="桜田淳子"></div>
-        <div><label>訪問日</label><input id="date" type="date"></div>
-      </div>
-      <div style="margin-top:12px"><label>訪問先</label><input id="place" placeholder="例：○○保育園・○年○組"></div>
-    </div>
-
-    <div class="card">
-      <label>訪問メモ</label>
-      <textarea id="memo" placeholder="話したまま入力してください。&#10;&#10;例：朝の会では先生の声かけで着席できていた。友達と一緒の活動では笑顔が見られた。課題では途中で席を離れたが、声かけで戻れた。担任から最近は落ち着いて活動できることが増えたと聞いた。"></textarea>
-      <div class="buttons">
-        <button class="secondary" id="voice">音声入力</button>
-        <button class="primary" id="organize">AIで整理</button>
-        <button class="secondary" id="clear">クリア</button>
-      </div>
-      <div class="status" id="status"></div>
-    </div>
-
-    <div class="card result hidden" id="resultCard">
-      <div class="notice">自動整理の結果です。事実関係を確認・修正してから記録に使用してください。</div>
-      <div style="margin-top:14px">
-        <h3>① 学級・学校の様子</h3>
-        <textarea id="r1"></textarea>
-      </div>
-      <div style="margin-top:14px">
-        <h3>② 直接支援</h3>
-        <textarea id="r2"></textarea>
-      </div>
-      <div style="margin-top:14px">
-        <h3>③ 間接支援</h3>
-        <textarea id="r3"></textarea>
-      </div>
-      <div class="buttons">
-        <button class="success" id="save">この内容を保存</button>
-      </div>
-    </div>
-  </section>
-
-  <section id="aiPanel" class="hidden">
-    <div class="card">
-      <h2 style="margin-top:0">AI設定</h2>
-      <label>使用するAI</label>
-      <select id="ai">
-        <option>ChatGPT</option><option>Gemini</option><option>Claude</option><option>AIなし</option>
-      </select>
-      <div style="margin-top:14px">
-        <label>AIに送る前の匿名化</label>
-        <select id="anon"><option>ON（推奨）</option><option>OFF</option></select>
-      </div>
-      <p class="small">現在の動作確認版では外部AIへ送信しません。「AIで整理」は端末内の整理処理で動作確認します。</p>
-    </div>
-  </section>
-
-  <section id="checkPanel" class="hidden">
-    <div class="card">
-      <h2 style="margin-top:0">確認</h2>
-      <div id="saved">まだ保存された記録はありません。</div>
-    </div>
-  </section>
+*{box-sizing:border-box}body{margin:0;background:#f5f7fb;color:#20252b;font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic",sans-serif}
+header{background:#fff;padding:18px;border-bottom:1px solid #e4e8ee;position:sticky;top:0;z-index:3}h1{margin:0;font-size:24px}.sub{color:#68727e;font-size:13px}
+main{padding:16px;max-width:720px;margin:auto}.card{background:#fff;border-radius:16px;padding:16px;margin-bottom:14px;box-shadow:0 1px 5px #0001}
+label{display:block;font-weight:700;font-size:14px;margin:0 0 7px}input,textarea,select{width:100%;border:1px solid #d9dee7;border-radius:11px;padding:12px;font-size:16px;background:#fff}textarea{min-height:150px;line-height:1.65}
+button{border:0;border-radius:11px;padding:13px 15px;font-size:16px;font-weight:700}.primary{background:#5b8def;color:#fff}.secondary{background:#eef2f8;color:#27303a}.success{background:#2e9d67;color:#fff}
+.buttons{display:flex;gap:9px;flex-wrap:wrap;margin-top:11px}.hidden{display:none}.status,.muted{font-size:13px;color:#69737f}.nav{display:flex;gap:8px;margin-bottom:12px}.nav button{flex:1}.item{padding:14px 0;border-bottom:1px solid #edf0f4}.name{font-weight:700;font-size:17px}.notice{background:#f6f8ff;border-left:4px solid #5b8def;padding:10px 12px;border-radius:8px;font-size:13px;line-height:1.5}.record{background:#f8f9fc;border-radius:12px;padding:12px;margin-top:10px}
+</style></head><body>
+<header><h1>ほいサポ</h1><div class="sub">保育所等訪問支援・記録アプリ</div></header><main>
+<div class="nav"><button class="primary" id="navChildren">子ども一覧</button><button class="secondary" id="navRecord">記録</button><button class="secondary" id="navAI">AI設定</button></div>
+<section id="children"><div class="card"><h2>子ども一覧</h2><div id="childList"></div><div class="buttons"><button class="primary" id="addChild">＋ 新しい子どもを登録</button></div><p class="muted">子ども・訪問記録はこのiPhoneの端末内に保存されます。</p></div></section>
+<section id="history" class="hidden"><div class="card"><button class="secondary" id="back">← 子ども一覧</button><h2 id="historyTitle"></h2><div id="historyList"></div><div class="buttons"><button class="primary" id="newVisit">＋ 新しい訪問記録</button></div></div></section>
+<section id="record" class="hidden"><div class="card"><button class="secondary" id="backHistory">← 訪問履歴</button><h2>訪問記録</h2><label>対象児</label><input id="child" readonly><div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px"><div><label>訪問日</label><input id="date" type="date"></div><div><label>訪問先</label><input id="place" placeholder="例：○○保育園・○年○組"></div></div></div>
+<div class="card"><label>訪問メモ</label><textarea id="memo" placeholder="話したまま入力してください。"></textarea><div class="buttons"><button class="secondary" id="voice">音声入力</button><button class="primary" id="organize">整理する</button><button class="secondary" id="clear">クリア</button></div><div class="status" id="status"></div></div>
+<div class="card hidden" id="result"><div class="notice">整理結果です。必ず事実関係を確認・修正してから保存してください。</div><label style="margin-top:14px">① 学級・学校の様子</label><textarea id="r1"></textarea><label style="margin-top:14px">② 直接支援</label><textarea id="r2"></textarea><label style="margin-top:14px">③ 間接支援</label><textarea id="r3"></textarea><div class="buttons"><button class="success" id="save">この内容を保存</button></div></div></section>
+<section id="ai" class="hidden"><div class="card"><h2>AI設定</h2><label>使用するAI</label><select><option>ChatGPT</option><option>Gemini</option><option>Claude</option><option>AIなし</option></select><label style="margin-top:14px">AIに送る前の匿名化</label><select><option>ON（推奨）</option><option>OFF</option></select><p class="muted">現在は外部AIへ送信しません。</p></div></section>
 </main>
-
 <script>
-const $=id=>document.getElementById(id);
-$("date").value=new Date().toISOString().slice(0,10);
-
-function splitSentences(text){
-  return text.replace(/\n+/g,"。").split(/[。！？!?]+/).map(s=>s.trim()).filter(Boolean);
-}
-function organize(text){
-  const ss=splitSentences(text);
-  const school=[], direct=[], indirect=[], other=[];
-  ss.forEach(s=>{
-    if(/担任|先生|保育士|教師|学校|園|学級|友達|集団|朝の会|活動|着席|席を離|教室|クラス/.test(s)) school.push(s);
-    else if(/支援|声かけ|介入|促し|手伝|一緒に|援助|直接|課題|練習|対応/.test(s)) direct.push(s);
-    else if(/聞いた|話し合|共有|相談|確認|伝え|担任から|保護者|今後|方針/.test(s)) indirect.push(s);
-    else other.push(s);
-  });
-  if(other.length) school.push(...other);
-  return {
-    r1: school.length ? school.join("。")+"。" : "該当する記録はありません。",
-    r2: direct.length ? direct.join("。")+"。" : "該当する記録はありません。",
-    r3: indirect.length ? indirect.join("。")+"。" : "該当する記録はありません。"
-  };
-}
-$("organize").onclick=()=>{
-  const text=$("memo").value.trim();
-  if(!text){$("status").textContent="先に訪問メモを入力してください。";return;}
-  const r=organize(text);
-  $("r1").value=r.r1;$("r2").value=r.r2;$("r3").value=r.r3;
-  $("resultCard").classList.remove("hidden");
-  $("status").textContent="整理しました。内容を確認してください。";
-  localStorage.setItem("hoisapoDraft",JSON.stringify({...r,child:$("child").value,date:$("date").value,place:$("place").value}));
-};
-$("clear").onclick=()=>{$("memo").value="";$("resultCard").classList.add("hidden");$("status").textContent="";};
-$("save").onclick=()=>{
-  const data={child:$("child").value,date:$("date").value,place:$("place").value,r1:$("r1").value,r2:$("r2").value,r3:$("r3").value,savedAt:new Date().toLocaleString("ja-JP")};
-  localStorage.setItem("hoisapoRecord",JSON.stringify(data));
-  $("status").textContent="記録を端末内に保存しました。";
-  $("saved").innerHTML="<b>"+data.child+"</b><br>"+data.date+"<br><br><b>①</b> "+data.r1+"<br><br><b>②</b> "+data.r2+"<br><br><b>③</b> "+data.r3;
-};
-$("voice").onclick=()=>{
-  const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-  if(!SR){$("status").textContent="この環境では音声入力に対応していません。iPhoneのキーボードのマイクをご利用ください。";return;}
-  const rec=new SR(); rec.lang="ja-JP"; rec.interimResults=false;
-  $("status").textContent="話してください…";
-  rec.onresult=e=>{$("memo").value+=($("memo").value?" ":"")+e.results[0][0].transcript;$("status").textContent="音声を入力しました。";};
-  rec.onerror=()=>{$("status").textContent="音声入力を開始できませんでした。";};
-  rec.start();
-};
-function show(panel){
-  ["recordPanel","aiPanel","checkPanel"].forEach(x=>$(x).classList.add("hidden"));
-  $(panel).classList.remove("hidden");
-}
-$("tabRecord").onclick=()=>show("recordPanel");
-$("tabAI").onclick=()=>show("aiPanel");
-$("tabCheck").onclick=()=>show("checkPanel");
-const old=localStorage.getItem("hoisapoRecord");
-if(old){const d=JSON.parse(old);$("saved").innerHTML="<b>"+d.child+"</b><br>"+d.date+"<br><br><b>①</b> "+d.r1+"<br><br><b>②</b> "+d.r2+"<br><br><b>③</b> "+d.r3;}
-if("serviceWorker" in navigator){navigator.serviceWorker.register("sw.js").catch(()=>{});}
-</script>
-</body>
-</html>
+const $=id=>document.getElementById(id),CK="hoisapo_children_v2",RK="hoisapo_records_v2";
+let children=JSON.parse(localStorage.getItem(CK)||"[]"),records=JSON.parse(localStorage.getItem(RK)||"[]"),currentChild="",editingId=null;
+const saveAll=()=>{localStorage.setItem(CK,JSON.stringify(children));localStorage.setItem(RK,JSON.stringify(records))};
+const show=id=>{["children","history","record","ai"].forEach(x=>$(x).classList.add("hidden"));$(id).classList.remove("hidden")};
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+function renderChildren(){let e=$("childList");if(!children.length){e.innerHTML='<div class="muted">まだ子どもが登録されていません。</div>';return}e.innerHTML=children.map((n,i)=>'<div class="item"><div class="name">'+esc(n)+'</div><div class="muted">訪問記録：'+records.filter(r=>r.child===n).length+'件</div><div class="buttons"><button class="secondary" onclick="openHistory('+i+')">記録を見る</button></div></div>').join("")}
+function openHistory(i){currentChild=children[i];$("historyTitle").textContent=currentChild+" の訪問履歴";renderHistory();show("history")}
+function renderHistory(){let rs=records.filter(r=>r.child===currentChild).sort((a,b)=>b.date.localeCompare(a.date));$("historyList").innerHTML=rs.length?rs.map(r=>'<div class="record"><b>'+esc(r.date)+'</b><div class="muted">'+esc(r.place||"訪問先未入力")+'</div><div class="buttons"><button class="secondary" onclick="editRecord(''+r.id+'')">記録を見る・修正</button></div></div>').join(""):'<div class="muted">まだ訪問記録がありません。</div>'}
+function startNew(){editingId=null;$("child").value=currentChild;$("date").value=new Date().toISOString().slice(0,10);$("place").value="";$("memo").value="";$("r1").value="";$("r2").value="";$("r3").value="";$("result").classList.add("hidden");$("status").textContent="";show("record")}
+function editRecord(id){let r=records.find(x=>x.id===id);if(!r)return;editingId=id;currentChild=r.child;$("child").value=r.child;$("date").value=r.date;$("place").value=r.place||"";$("memo").value=r.memo||"";$("r1").value=r.r1||"";$("r2").value=r.r2||"";$("r3").value=r.r3||"";$("result").classList.remove("hidden");show("record")}
+function split(t){return t.replace(/\n+/g,"。").split(/[。！？!?]+/).map(s=>s.trim()).filter(Boolean)}
+function classify(t){let a=[],b=[],c=[],u=[];split(t).forEach(s=>{let person=/本人|児童|子ども|本人に|児に/.test(s),staff=/担任|先生|保育士|教師|学校職員|園長/.test(s),action=/声をかけ|声かけ|説明|確認|促し|促す|援助|支援|介入|一緒に|手伝|練習|個別に/.test(s),info=/聞いた|とのこと|報告|様子|見られ|観察|参加|着席|活動|友達|集団|授業|朝の会|教室/.test(s),consult=/話し合|相談|助言|伝え|共有|支援方法|対応方法|方針|情報提供/.test(s);if(staff&&consult||consult)c.push(s);else if(person&&action)b.push(s);else if(info)a.push(s);else u.push(s)});a.push(...u);return{a:a.join("。"),b:b.join("。"),c:c.join("。")}}
+$("organize").onclick=()=>{let t=$("memo").value.trim();if(!t){$("status").textContent="先に訪問メモを入力してください。";return}let x=classify(t);$("r1").value=x.a?x.a+"。":"該当する記録はありません。";$("r2").value=x.b?x.b+"。":"該当する記録はありません。";$("r3").value=x.c?x.c+"。":"該当する記録はありません。";$("result").classList.remove("hidden");$("status").textContent="整理しました。内容を確認してください。"};
+$("save").onclick=()=>{let d={id:editingId||Date.now().toString(),child:currentChild,date:$("date").value,place:$("place").value,memo:$("memo").value,r1:$("r1").value,r2:$("r2").value,r3:$("r3").value};if(!children.includes(currentChild))children.push(currentChild);let i=records.findIndex(r=>r.id===d.id);if(i>=0)records[i]=d;else records.push(d);saveAll();$("status").textContent="記録を保存しました。";};
+$("addChild").onclick=()=>{let n=prompt("子どもの名前を入力してください。テストでは「桜田淳子」を使用できます。");if(!n||!n.trim())return;n=n.trim();if(!children.includes(n)){children.push(n);saveAll()}currentChild=n;openHistory(children.indexOf(n))};
+$("newVisit").onclick=startNew;$("back").onclick=()=>{renderChildren();show("children")};$("backHistory").onclick=()=>{renderHistory();show("history")};
+$("navChildren").onclick=()=>{renderChildren();show("children")};$("navRecord").onclick=()=>currentChild?startNew():show("children");$("navAI").onclick=()=>show("ai");
+$("clear").onclick=()=>{if(confirm("入力内容をクリアしますか？"))startNew()};
+$("voice").onclick=()=>{let SR=window.SpeechRecognition||window.webkitSpeechRecognition;if(!SR){$("status").textContent="音声入力に対応していません。iPhoneキーボードのマイクをご利用ください。";return}let r=new SR();r.lang="ja-JP";r.interimResults=false;$("status").textContent="話してください…";r.onresult=e=>{$("memo").value+=($("memo").value?" ":"")+e.results[0][0].transcript;$("status").textContent="音声を入力しました。"};r.onerror=()=>{$("status").textContent="音声入力を開始できませんでした。"};r.start()};
+renderChildren();if("serviceWorker"in navigator)navigator.serviceWorker.register("sw.js").catch(()=>{});
+</script></body></html>
